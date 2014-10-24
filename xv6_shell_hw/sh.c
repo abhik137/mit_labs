@@ -60,8 +60,17 @@ runcmd(struct cmd *cmd)
     ecmd = (struct execcmd*)cmd;
     if(ecmd->argv[0] == 0)
       exit(0);
-    fprintf(stderr, "exec not implemented\n");
+    // printf("%s\n", (ecmd->argv[0]));
+    // fprintf(stderr, "exec not implemented\n");
     // Your code here ...
+    execvp(ecmd->argv[0], &(ecmd->argv[0]));    // using 'execvp' eliminates the need for 'bin/ls'
+    /*
+    The routine execvp() will perform the same purpose except that it will use environment variable PATH 
+    to determine which executable to process. Thus a fully qualified path name would not have to be used.
+    The first argument to the function could instead be "ls". The function execvp() can also take the fully
+    qualified name as it also resolves explicitly.
+    ref: http://www.yolinux.com/TUTORIALS/ForkExecProcesses.html
+    */
     break;
 
   case '>':
